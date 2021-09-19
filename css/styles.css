@@ -8,6 +8,7 @@
   --main-background-color: #ffffff;
   --secondary-background-color: #f5f4fa;
   --third-background-color: #2f303a;
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -120,7 +121,11 @@ img {
 }
 
 /*----Модальное окно-----*/
-
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 .backdrop {
   position: fixed;
   left: 0;
@@ -130,11 +135,6 @@ img {
   height: 100%;
 
   background: rgba(0, 0, 0, 0.2);
-}
-
-.backdrop.is-hidden {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .modal {
@@ -200,12 +200,14 @@ img {
 .main-button:hover,
 .main-button:focus {
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.22);
+  transition: box-shadow 250ms var(--timing-function);
 }
 
 .hero-button:focus,
 .hero-button:hover {
   color: var(--secondary-text-color);
   background-color: var(--accent-color);
+  transition: background-color 250ms var(--timing-function);
 }
 
 .works-section,
@@ -383,9 +385,13 @@ img {
 }
 nav-item {
   display: flex;
+
+  /*width: 100%;*/
 }
 
 .nav-link {
+  position: relative;
+
   padding-top: 32px;
   padding-bottom: 32px;
 
@@ -395,6 +401,25 @@ nav-item {
   letter-spacing: 0.02em;
   color: var(--third-text-color);
 }
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 0%;
+  height: 4px;
+  background-color: var(--accent-color);
+  opacity: 0;
+  transition: opacity 250ms var(--timing-function);
+  transition: width 220ms var(--timing-function);
+}
+.nav-link:hover::after {
+  opacity: 1;
+  width: 100%;
+}
+
 .container {
   width: 1200px;
   padding-left: 15px;
@@ -490,7 +515,36 @@ nav-item {
 
 .projects-item-link:focus,
 .projects-item-link:hover {
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(94, 68, 68, 0.25);
+  transition: box-shadow 250ms var(--timing-function);
+}
+.projects-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.projects-overlay-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(33, 150, 243, 0.9);
+  padding: 63px 24px;
+
+  font-size: 18px;
+  line-height: 1.56;
+  /* or 156% */
+  letter-spacing: 0.03em;
+  color: var(--secondary-text-color);
+  overflow: hidden;
+  transform: translatey(100%);
+  opacity: 0;
+  transition: transform 250ms var(--timing-function);
+}
+
+.projects-item:hover .projects-overlay-text {
+  transform: translatey(0);
+  opacity: 1;
 }
 
 .projects-title {
@@ -557,6 +611,7 @@ nav-item {
 .sosial-link:focus {
   fill: #ffffff;
   background-color: #2196f3;
+  transition: background-color 250ms var(--timing-function);
 }
 
 .sosial-item:not(:last-child) {
@@ -590,6 +645,7 @@ nav-item {
 .clients-link:focus {
   border: 1px solid #2196f3;
   border-radius: 4px;
+  transition: border-color 250ms var(--timing-function);
 }
 .clients-item:hover .clients-icon,
 .clients-link:focus .clients-icon {
@@ -628,4 +684,5 @@ nav-item {
 .page-footer .sosial-link:focus {
   fill: #ffffff;
   background-color: #2196f3;
+  transition: background-color 250ms var(--timing-function);
 }
