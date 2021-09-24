@@ -75,8 +75,8 @@ img {
 .link {
   text-decoration: none;
   display: block;
-  transition: box-shadow 250ms var(--timing-function),
-    border 250ms var(--timing-function);
+  /*transition: box-shadow 250ms var(--timing-function),
+    border 250ms var(--timing-function);*/
 }
 
 .page-header .contacts-link {
@@ -691,7 +691,7 @@ nav-item {
   color: #2196f3;
   border: 1px solid #2196f3;
   border-radius: 4px;
-  transition: border-color 250ms var(--timing-function),
+  transition: border 250ms var(--timing-function),
     color 250ms var(--timing-function);
 }
 /*.clients-item:hover .clients-icon,
